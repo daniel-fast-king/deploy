@@ -1,0 +1,424 @@
+/* ============================================
+   MOBILE RESPONSIVE – COMPLETE OVERRIDES
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* ---------- VARIABLES ---------- */
+    :root {
+        --sidebar-width: min(300px, 85vw);
+        --gap: 12px;
+        --header-height: 56px;
+        --radius: 20px;
+        --radius-sm: 14px;
+    }
+
+    /* ---------- SIDEBAR ---------- */
+    .sidebar {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: var(--sidebar-width) !important;
+        max-width: var(--sidebar-width) !important;
+        min-width: var(--sidebar-width) !important;
+        transform: translateX(-110%);
+        transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        z-index: 2200;
+        border-radius: 0 20px 20px 0 !important;
+        height: 100dvh;
+        overflow-y: auto;
+    }
+
+    body.sidebar-open .sidebar {
+        transform: translateX(0);
+    }
+
+    .sidebar-content {
+        padding: 70px 16px 32px;
+        height: auto;
+        min-height: 100%;
+        box-sizing: border-box;
+    }
+
+    .sidebar-backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 2100;
+    }
+
+    body.sidebar-open .sidebar-backdrop {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .fixed-toggle {
+        left: 16px;
+        top: 18px;
+        width: 44px;
+        height: 44px;
+        z-index: 2300;
+        background: white;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+        padding: 0 12px;
+    }
+
+    .header-title {
+        margin-left: 48px;
+        font-size: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .back-btn {
+        position: absolute !important;
+        left: 12px !important;
+        top: 24px !important;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: white;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+    }
+
+    .view-header {
+        padding: 12px 12px 12px 12px !important;
+        position: relative;
+        min-height: auto;
+    }
+
+    .view-header h1,
+    .view-header h2 {
+        font-size: 1.5rem;
+        margin: 0;
+        text-align: center;
+    }
+
+    /* ---------- CONTENT AREA ---------- */
+    .main {
+        padding: 12px;
+    }
+
+    .content {
+        padding: 0;
+    }
+
+    .view {
+        padding: 0;
+    }
+
+    /* ---------- CARDS GRID – ALL SINGLE COLUMN ON MOBILE ---------- */
+    .cards-grid.grades,
+    .cards-grid.subjects-10,
+    .cards-grid.subjects-6 {
+        grid-template-columns: 1fr !important;
+        gap: 12px;
+        max-width: 100%;
+        padding: 0 4px;
+    }
+
+    /* ---------- MOBILE CARD CLICK FIXES ---------- */
+    .card {
+        height: auto;
+        padding: 16px;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: rgba(99, 102, 241, 0.2);
+        pointer-events: auto !important;
+        cursor: pointer;
+        transform: translateZ(0);
+        will-change: transform;
+        -webkit-touch-callout: default;
+    }
+
+    .card.wide {
+        height: auto;
+        min-height: 120px;
+    }
+
+    .card.subject {
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        height: auto;
+        min-height: 80px;
+    }
+
+    .card.subject .card-float {
+        width: 48px;
+        height: 48px;
+        margin: 0;
+        pointer-events: none !important;
+    }
+
+    .card.subject .emoji-scene {
+        width: 48px;
+        height: 48px;
+        pointer-events: none !important;
+        touch-action: none;
+    }
+
+    .card.subject .emoji-main {
+        font-size: 32px;
+        pointer-events: none !important;
+        touch-action: none;
+    }
+
+    .card.subject .emoji-deco {
+        display: none;
+        pointer-events: none !important;
+    }
+
+    .card.subject .text-content {
+        flex: 1;
+        pointer-events: none !important;
+    }
+
+    /* Ensure decorative elements don't block clicks */
+    .card .emoji-scene,
+    .card .emoji-main,
+    .card .emoji-deco,
+    .card .card-bg-pattern,
+    .card .card-wave {
+        pointer-events: none !important;
+        touch-action: none;
+    }
+
+    .card-title {
+        font-size: 1rem;
+        pointer-events: none !important;
+    }
+
+    .card-subtitle {
+        font-size: 0.75rem;
+        pointer-events: none !important;
+    }
+
+    /* ---------- UNIT VIEW – 1 COLUMN ON MOBILE ---------- */
+    .unit-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px;
+        padding: 0 4px 20px;
+    }
+
+    .unit-box {
+        padding: 16px 20px;
+        min-height: 70px;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: rgba(99, 102, 241, 0.2);
+        cursor: pointer;
+        transform: translateZ(0);
+        pointer-events: auto !important;
+    }
+
+    .unit-box .unit-info,
+    .unit-box .unit-number,
+    .unit-box .unit-name,
+    .unit-box .unit-arrow {
+        pointer-events: none !important;
+    }
+
+    .unit-number {
+        font-size: 0.7rem;
+    }
+
+    .unit-name {
+        font-size: 0.95rem;
+    }
+
+    /* ---------- FLOATING ACTION BUTTON ---------- */
+    .fab {
+        bottom: 20px;
+        right: 20px;
+        width: 56px;
+        height: 56px;
+        box-shadow: 0 8px 20px rgba(99, 102, 241, 0.5);
+        touch-action: manipulation;
+    }
+
+    .fab .material-icons {
+        font-size: 24px;
+    }
+
+    /* ---------- SELECTION PANEL ---------- */
+    .selection-panel {
+        left: 16px;
+        right: 16px;
+        bottom: 88px;
+        width: auto;
+        max-height: 60vh;
+        border-radius: 20px;
+    }
+
+    .selection-header {
+        padding: 16px;
+    }
+
+    .selection-header h3 {
+        font-size: 1rem;
+    }
+
+    .selection-count {
+        font-size: 0.75rem;
+    }
+
+    .selection-list-container {
+        max-height: 40vh;
+        padding: 16px;
+    }
+
+    .selection-item {
+        padding: 14px;
+        touch-action: manipulation;
+    }
+
+    .selection-unit {
+        font-size: 0.9rem;
+    }
+
+    .selection-grade {
+        font-size: 0.7rem;
+    }
+
+    /* ---------- AI MODAL ---------- */
+    .ai-modal {
+        width: 92vw;
+        max-width: 400px;
+        padding: 20px;
+        max-height: 80vh;
+    }
+
+    .ai-option {
+        padding: 16px;
+        touch-action: manipulation;
+        cursor: pointer;
+    }
+
+    .ai-option-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 24px;
+    }
+
+    .ai-option-name {
+        font-size: 0.95rem;
+    }
+
+    .ai-option-desc {
+        font-size: 0.75rem;
+    }
+
+    /* ---------- TOAST NOTIFICATIONS ---------- */
+    .toast-container {
+        left: 16px;
+        right: 16px;
+        bottom: 24px;
+        transform: none;
+        width: auto;
+    }
+
+    .toast {
+        padding: 12px 20px;
+        font-size: 0.85rem;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    /* ---------- UTILITY MODALS ---------- */
+    .modal-box {
+        width: 90%;
+        max-width: 320px;
+        padding: 20px 16px;
+    }
+
+    .modal-input {
+        padding: 14px;
+        font-size: 1rem;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .modal-btn-primary,
+    .modal-btn-cancel,
+    .modal-btn-logout {
+        width: 100%;
+        padding: 14px;
+        font-size: 1rem;
+        touch-action: manipulation;
+    }
+
+    /* ---------- DEVICE LIST MODAL ---------- */
+    .devices-list {
+        max-height: 30vh;
+    }
+
+    .device-item {
+        padding: 12px;
+        font-size: 0.85rem;
+    }
+
+    /* ---------- LOGIN PAGE (if visible) ---------- */
+    .login-box {
+        padding: 24px 20px;
+        max-width: 320px;
+    }
+
+    .login-box h1 {
+        font-size: 1.6rem;
+    }
+
+    .phone-input-wrapper {
+        font-size: 1rem;
+    }
+
+    .phone-prefix {
+        padding: 12px;
+    }
+
+    .input-group input {
+        padding: 14px;
+    }
+
+    .login-btn {
+        padding: 16px;
+        font-size: 1rem;
+        touch-action: manipulation;
+    }
+
+    .contact-buttons {
+        flex-wrap: wrap;
+    }
+
+    .contact-btn {
+        padding: 12px 0;
+        font-size: 0.85rem;
+        touch-action: manipulation;
+    }
+
+    /* ---------- HIDE DECORATIVE EMOJIS ON MOBILE (optional) ---------- */
+    .emoji-deco {
+        display: none;
+    }
+
+    /* ---------- ADJUST ANY FLOATING ELEMENTS ---------- */
+    .fab-badge {
+        min-width: 20px;
+        height: 20px;
+        font-size: 10px;
+        pointer-events: none;
+    }
+}
