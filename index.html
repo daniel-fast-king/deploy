@@ -53,15 +53,29 @@
 
     <!-- 10. view.css        → Grade / subject / unit views -->
     <link rel="stylesheet" href="view.css">
-
-    <!-- 11. login.css       → Login screen — highest specificity / overlay -->
+<!-- 11. splash.css      → Splash screen - MUST be before login -->
+<link rel="stylesheet" href="splash.css">
+    <!-- 12. login.css       → Login screen — highest specificity / overlay -->
     <link rel="stylesheet" href="login.css">
 
-    <!-- 12. mobile.css      → Responsive / mobile adjustments — MUST be last -->
+    <!-- 13. mobile.css      → Responsive / mobile adjustments — MUST be last -->
     <link rel="stylesheet" href="mobile.css">
    
 </head>
 <body>
+    <!-- SPLASH SCREEN -->
+<div id="splashScreen" class="splash-overlay">
+    <div class="splash-content">
+        <div class="splash-logo">
+            <img src="profile.png" alt="Scholar's Archive">
+        </div>
+        <h1 class="splash-main-text">designed by us,<br><span>for us</span></h1>
+        <p class="splash-sub-text">Scholar's Archive</p>
+    </div>
+    <div class="splash-footer">
+        <p>made by <strong>K.quant production</strong></p>
+    </div>
+</div>
     <!-- LOGIN SECTION -->
     <div class="login-container" id="loginContainer">
         <div class="login-box">
