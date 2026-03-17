@@ -1,6 +1,7 @@
 // ============================================
 // FIREBASE AUTHENTICATION - ScholarsArchive
 // Phone + Username + Password + 2 Device Limit
+// Persistent login + real‑time device validation
 // ============================================
 
 const firebaseConfig = {
@@ -18,12 +19,15 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-// Flag to prevent auto-login before validation
+// Flag to mark successful validation
 let loginValidated = false;
 
-// Global device info (set on page load)
+// Device info
 let currentDeviceId = '';
 let currentDeviceName = '';
+
+// Firestore listener for real‑time device changes
+let devicesListener = null;
 
 // ============================================
 // TOAST NOTIFICATION
@@ -200,7 +204,36 @@ function initializeDeviceInfo() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', initializeDeviceInfo);
+// Initialize device info immediately
+initializeDeviceInfo();
+
+// ============================================
+// REAL‑TIME DEVICE LISTENER
+// ============================================
+function setupDevicesListener(userId) {
+  // Remove any existing listener
+  if (devicesListener) {
+    devicesListener();
+    devicesListener = null;
+  }
+
+  devicesListener = db.collection('users').doc(userId).onSnapshot((doc) => {
+    if (doc.exists) {
+      const devices = doc.data().devices || [];
+      const stillExists = devices.some(d => d.deviceId === currentDeviceId);
+      if (!stillExists) {
+        // Device was removed from the list – force logout
+        showLoginToast('Your device has been removed from this account.', 'error');
+        logout();
+      }
+    } else {
+      // User document deleted – force logout
+      logout();
+    }
+  }, (error) => {
+    console.error('Devices listener error:', error);
+  });
+}
 
 // ============================================
 // PHONE INPUT VALIDATION & PASSWORD TOGGLE
@@ -212,25 +245,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (phoneInput && phoneError) {
         phoneInput.addEventListener('input', function(e) {
-            let value = this.value.replace(/\D/g, ''); // keep only digits
+            let value = this.value.replace(/\D/g, '');
             
-            // Remove leading zero if present
             if (value.startsWith('0')) {
                 phoneError.textContent = 'Invalid format – remove leading zero';
-                this.value = value.substring(1); // remove the zero automatically
+                this.value = value.substring(1);
             } else {
                 phoneError.textContent = '';
             }
             
-            // Enforce max length 9
             if (value.length > 9) {
                 phoneError.textContent = 'Too long – maximum 9 digits';
                 this.value = value.slice(0, 9);
             } else {
-                this.value = value; // update with cleaned digits
+                this.value = value;
             }
             
-            // Check if first digit is 9 (only if at least one digit)
             if (this.value.length > 0 && !this.value.startsWith('9')) {
                 phoneError.textContent = 'Must start with 9';
             }
@@ -282,11 +312,10 @@ function showApp() {
 // ============================================
 
 async function login() {
-  const phoneDigits = document.getElementById('phoneInput').value.trim(); // digits after +251
+  const phoneDigits = document.getElementById('phoneInput').value.trim();
   const username = document.getElementById('usernameInput').value.trim();
   const password = document.getElementById('passwordInput').value.trim();
 
-  // Validate phone
   if (!phoneDigits) {
     showLoginToast('Enter phone number', 'error');
     return;
@@ -317,7 +346,7 @@ async function login() {
   showLoginLoader(true);
 
   try {
-    const fullPhone = '+251' + phoneDigits; // complete phone number
+    const fullPhone = '+251' + phoneDigits;
     const email = `${fullPhone.replace(/\D/g, '')}@scholarsarchive.app`;
     
     const userCredential = await auth.signInWithEmailAndPassword(email, password);
@@ -344,14 +373,12 @@ async function login() {
     const maxDevices = userData.maxDevices || 2;
     let devices = userData.devices || [];
     
-    // Clean up invalid entries
     devices = devices.filter(d => d && typeof d === 'object' && d.deviceId && d.deviceName);
     
     const existingDeviceIndex = devices.findIndex(d => d.deviceId === deviceId);
     const isNewDevice = existingDeviceIndex === -1;
     
     if (isNewDevice) {
-      // NEW DEVICE - Check limit
       if (devices.length >= maxDevices) {
         await auth.signOut();
         showLoginLoader(false);
@@ -359,7 +386,6 @@ async function login() {
         return;
       }
       
-      // Add new device
       const now = new Date().toISOString();
       devices.push({
         deviceId: deviceId,
@@ -380,6 +406,9 @@ async function login() {
     window.currentUsername = userData.username;
     showLoginToast(`Welcome, ${userData.username}!`, 'success');
     
+    // Set up real‑time listener for this user
+    setupDevicesListener(user.uid);
+    
     setTimeout(() => {
       showLoginLoader(false);
       showApp();
@@ -397,23 +426,19 @@ async function login() {
   }
 }
 
-// Auto-login check
-auth.onAuthStateChanged(async (user) => {
-  if (user && loginValidated) {
-    const userDoc = await db.collection('users').doc(user.uid).get();
-    if (userDoc.exists) {
-      window.currentUsername = userDoc.data().username;
-      showApp();
-    } else {
-      auth.signOut();
-    }
-  }
-});
-
-// Logout
+// ============================================
+// LOGOUT
+// ============================================
 function logout() {
   loginValidated = false;
+  
+  // Stop the real‑time listener
+  if (devicesListener) {
+    devicesListener();
+    devicesListener = null;
+  }
+  
   auth.signOut().then(() => {
-    location.reload();
+    location.reload();  // full reload to reset state
   });
 }
