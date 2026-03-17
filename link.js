@@ -1,4 +1,4 @@
-// Data structure
+// Data structure - ALL KEYS MUST MATCH main.js subjectsData.key
 const data = {
     9: {
         math: { name: "Math", units: { 
@@ -50,12 +50,19 @@ const data = {
             "Unit 4: Industrial": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 5: Modern": { download: "LINK_HERE", share: "LINK_HERE" }
         }},
-        Civics: { name: "Civics", units: { 
+        citizenship: { name: "Civics", units: {  // ← FIXED: was "Civics", now "citizenship"
             "Unit 1: Rights": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 2: Democracy": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 3: Constitution": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 4: Governance": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 5: Global": { download: "LINK_HERE", share: "LINK_HERE" }
+        }},
+        english: { name: "English", units: {  // ← ADDED: missing from link.js!
+            "Unit 1: Grammar": { download: "LINK_HERE", share: "LINK_HERE" },
+            "Unit 2: Literature": { download: "LINK_HERE", share: "LINK_HERE" },
+            "Unit 3: Writing": { download: "LINK_HERE", share: "LINK_HERE" },
+            "Unit 4: Speaking": { download: "LINK_HERE", share: "LINK_HERE" },
+            "Unit 5: Comprehension": { download: "LINK_HERE", share: "LINK_HERE" }
         }},
         ict: { name: "ICT", units: { 
             "Unit 1: Hardware": { download: "LINK_HERE", share: "LINK_HERE" },
@@ -115,12 +122,19 @@ const data = {
             "Unit 4: Africa": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 5: Contemporary": { download: "LINK_HERE", share: "LINK_HERE" }
         }},
-        Civics: { name: "Civics", units: { 
+        citizenship: { name: "Civics", units: {  // ← FIXED: was "Civics"
             "Unit 1: Identity": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 2: Justice": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 3: Civics": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 4: Law": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 5: Regional": { download: "LINK_HERE", share: "LINK_HERE" }
+        }},
+        english: { name: "English", units: {  // ← ADDED
+            "Unit 1: Advanced Grammar": { download: "LINK_HERE", share: "LINK_HERE" },
+            "Unit 2: Poetry": { download: "LINK_HERE", share: "LINK_HERE" },
+            "Unit 3: Drama": { download: "LINK_HERE", share: "LINK_HERE" },
+            "Unit 4: Novel": { download: "LINK_HERE", share: "LINK_HERE" },
+            "Unit 5: Essay Writing": { download: "LINK_HERE", share: "LINK_HERE" }
         }},
         ict: { name: "ICT", units: { 
             "Unit 1: Networks": { download: "LINK_HERE", share: "LINK_HERE" },
@@ -188,6 +202,13 @@ const data = {
             "Unit 4: Ag Eco": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 5: Extension": { download: "LINK_HERE", share: "LINK_HERE" }
         }},
+        english: { name: "English", units: {  // ← ADDED
+            "Unit 1: Comprehension": { download: "LINK_HERE", share: "LINK_HERE" },
+            "Unit 2: Composition": { download: "LINK_HERE", share: "LINK_HERE" },
+            "Unit 3: Summary": { download: "LINK_HERE", share: "LINK_HERE" },
+            "Unit 4: Poetry": { download: "LINK_HERE", share: "LINK_HERE" },
+            "Unit 5: Drama": { download: "LINK_HERE", share: "LINK_HERE" }
+        }},
         ict: { name: "ICT", units: { 
             "Unit 1: Advanced Programming": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 2: Data Structures": { download: "LINK_HERE", share: "LINK_HERE" },
@@ -231,6 +252,13 @@ const data = {
             "Unit 3: Farm Management": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 4: Agribusiness": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 5: Sustainability": { download: "LINK_HERE", share: "LINK_HERE" }
+        }},
+        english: { name: "English", units: {  // ← ADDED
+            "Unit 1: Critical Thinking": { download: "LINK_HERE", share: "LINK_HERE" },
+            "Unit 2: Research": { download: "LINK_HERE", share: "LINK_HERE" },
+            "Unit 3: Advanced Writing": { download: "LINK_HERE", share: "LINK_HERE" },
+            "Unit 4: Literature Analysis": { download: "LINK_HERE", share: "LINK_HERE" },
+            "Unit 5: Communication": { download: "LINK_HERE", share: "LINK_HERE" }
         }},
         ict: { name: "ICT", units: { 
             "Unit 1: Software Eng": { download: "LINK_HERE", share: "LINK_HERE" },
