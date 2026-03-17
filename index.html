@@ -369,78 +369,77 @@
                 </div>
             </div>
         </div>
-
-       <!-- AI MODAL -->
+<!-- AI MODAL -->
 <div class="ai-modal-overlay" id="aiModal">
     <div class="ai-modal">
-        <!-- Main selection (5 options) -->
-        <div id="aiSelectionMain">
-            <h2>Use with AI</h2>
-            <p>Choose an AI tool for your selected units</p>
-            <div class="ai-options">
-                <div class="ai-option" onclick="selectAI('notebook')">
-                    <div class="ai-option-icon notebook">📓</div>
-                    <div class="ai-option-info">
-                        <div class="ai-option-name">NotebookLM</div>
-                        <div class="ai-option-desc">Google’s notebook</div>
-                    </div>
-                    <span class="ai-option-arrow material-icons">arrow_forward</span>
+        <h2>Use with AI</h2>
+        <p>Choose an AI tool for your selected units</p>
+        <div class="ai-options">
+            <div class="ai-option" onclick="selectAI('notebook')">
+                <div class="ai-option-icon notebook">📓</div>
+                <div class="ai-option-info">
+                    <div class="ai-option-name">NotebookLM</div>
+                    <div class="ai-option-desc">Google's notebook</div>
                 </div>
-                <div class="ai-option" onclick="selectAI('gemini')">
-                    <div class="ai-option-icon gemini">✨</div>
-                    <div class="ai-option-info">
-                        <div class="ai-option-name">Gemini</div>
-                        <div class="ai-option-desc">Google’s AI</div>
-                    </div>
-                    <span class="ai-option-arrow material-icons">arrow_forward</span>
+                <span class="ai-option-arrow material-icons">arrow_forward</span>
+            </div>
+            <div class="ai-option" onclick="selectAI('gemini')">
+                <div class="ai-option-icon gemini">✨</div>
+                <div class="ai-option-info">
+                    <div class="ai-option-name">Gemini</div>
+                    <div class="ai-option-desc">Google's AI</div>
                 </div>
-                <div class="ai-option" onclick="selectAI('deepseek')">
-                    <div class="ai-option-icon deepseek">🧠</div>
-                    <div class="ai-option-info">
-                        <div class="ai-option-name">DeepSeek</div>
-                        <div class="ai-option-desc">Deep reasoning</div>
-                    </div>
-                    <span class="ai-option-arrow material-icons">arrow_forward</span>
+                <span class="ai-option-arrow material-icons">arrow_forward</span>
+            </div>
+            <div class="ai-option" onclick="selectAI('deepseek')">
+                <div class="ai-option-icon deepseek">🧠</div>
+                <div class="ai-option-info">
+                    <div class="ai-option-name">DeepSeek</div>
+                    <div class="ai-option-desc">Deep reasoning</div>
                 </div>
-                <div class="ai-option" onclick="selectAI('grok')">
-                    <div class="ai-option-icon grok">🚀</div>
-                    <div class="ai-option-info">
-                        <div class="ai-option-name">Grok</div>
-                        <div class="ai-option-desc">xAI’s chatbot</div>
-                    </div>
-                    <span class="ai-option-arrow material-icons">arrow_forward</span>
+                <span class="ai-option-arrow material-icons">arrow_forward</span>
+            </div>
+            <div class="ai-option" onclick="selectAI('grok')">
+                <div class="ai-option-icon grok">🚀</div>
+                <div class="ai-option-info">
+                    <div class="ai-option-name">Grok</div>
+                    <div class="ai-option-desc">xAI's chatbot</div>
                 </div>
-                <!-- New Other option -->
-                <div class="ai-option" onclick="showCustomURL()">
-                    <div class="ai-option-icon other">🔗</div>
-                    <div class="ai-option-info">
-                        <div class="ai-option-name">Other</div>
-                        <div class="ai-option-desc">Custom AI website</div>
-                    </div>
-                    <span class="ai-option-arrow material-icons">arrow_forward</span>
+                <span class="ai-option-arrow material-icons">arrow_forward</span>
+            </div>
+            <div class="ai-option" onclick="showCustomURL()">
+                <div class="ai-option-icon other">🔗</div>
+                <div class="ai-option-info">
+                    <div class="ai-option-name">Other</div>
+                    <div class="ai-option-desc">Custom AI website</div>
                 </div>
+                <span class="ai-option-arrow material-icons">arrow_forward</span>
             </div>
         </div>
+    </div>
+</div>
 
-       <div class="custom-url-modal" id="customURLModal">
-    <div class="custom-url-header">
-        <button class="back-to-ai" onclick="backToAI()">
-            <span class="material-icons">arrow_back</span>
-        </button>
-        <h2>Custom AI</h2>
-    </div>
-    <div class="custom-url-input-group">
-        <label>Enter AI Website URL</label>
-        <input type="url" class="custom-url-input" id="customURLInput" placeholder="https://..." autofocus>
-        <p class="custom-url-hint">Paste the URL of your preferred AI tool</p>
-    </div>
-    <div class="custom-url-actions">
-        <button class="btn-secondary" onclick="backToAI()">Back</button>
-        <button class="btn-primary" onclick="submitCustomURL()">Open</button>
+<!-- CUSTOM URL MODAL - SEPARATE POPUP -->
+<div class="custom-url-overlay" id="customURLOverlay">
+    <div class="custom-url-modal">
+        <div class="custom-url-header">
+            <button class="back-to-ai" onclick="backToAI()">
+                <span class="material-icons">arrow_back</span>
+            </button>
+            <h2>Custom AI</h2>
+        </div>
+        <div class="custom-url-input-group">
+            <label>Enter AI Website URL</label>
+            <input type="url" class="custom-url-input" id="customURLInput" placeholder="https://..." autofocus>
+            <p class="custom-url-hint">Paste the URL of your preferred AI tool</p>
+        </div>
+        <div class="custom-url-actions">
+            <button class="btn-secondary" onclick="backToAI()">Back</button>
+            <button class="btn-primary" onclick="submitCustomURL()">Open</button>
+        </div>
     </div>
 </div>
-    </div>
-</div>
+
 
         <!-- LOADER -->
         <div id="loader">
