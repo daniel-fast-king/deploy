@@ -1,5 +1,5 @@
 /* ============================================
-   AI MODAL – COMPACT, 5 OPTIONS + CUSTOM PANEL
+   AI MODAL – COMPACT, 5 OPTIONS
    ============================================ */
 
 .ai-modal-overlay {
@@ -31,7 +31,7 @@
     transition: all 0.3s ease;
     border: 1px solid rgba(255,255,255,0.5);
     max-height: 90vh;
-    overflow-y: auto; /* only if needed */
+    overflow-y: auto;
 }
 
 .ai-modal-overlay.open .ai-modal {
@@ -125,21 +125,42 @@
     transform: translateX(4px);
 }
 
-/* Custom URL panel (re‑added) */
-.custom-url-modal {
+/* ============================================
+   CUSTOM URL MODAL - SEPARATE POPUP
+   ============================================ */
+
+.custom-url-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
     display: none;
-    flex-direction: column;
-    height: 100%;
+    align-items: center;
+    justify-content: center;
+    z-index: 2001;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
 }
 
-.custom-url-modal.open {
+.custom-url-overlay.open {
     display: flex;
-    animation: slideIn 0.3s ease;
+    opacity: 1;
 }
 
-@keyframes slideIn {
-    from { opacity: 0; transform: translateX(10px); }
-    to { opacity: 1; transform: translateX(0); }
+.custom-url-modal {
+    background: white;
+    border-radius: 28px;
+    width: min(400px, 90vw);
+    padding: 28px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9) translateY(10px);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+.custom-url-overlay.open .custom-url-modal {
+    transform: scale(1) translateY(0);
 }
 
 .custom-url-header {
@@ -168,11 +189,18 @@
     color: white;
 }
 
+.custom-url-header h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+}
+
 .custom-url-input-group {
-    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-bottom: 24px;
 }
 
 .custom-url-input-group label {
@@ -207,7 +235,6 @@
 .custom-url-actions {
     display: flex;
     gap: 12px;
-    margin-top: 24px;
 }
 
 .btn-secondary {
