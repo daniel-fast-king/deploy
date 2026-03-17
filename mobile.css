@@ -250,7 +250,7 @@
 
     /* ---------- UNIT BOXES – SAME STYLE AS CARDS ---------- */
     .unit-box {
-        width: 100%;
+        width: 85%;
         max-width: 100%;
         padding: 16px 20px;
         min-height: 80px;
