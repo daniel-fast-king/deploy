@@ -800,7 +800,112 @@ async function logoutCurrentDevice() {
         showToast('Failed to logout', 'error');
     }
 }
+// ============================================
+// SPLASH SCREEN - Click first, then loading
+// ============================================
 
+document.addEventListener('DOMContentLoaded', () => {
+    const splash = document.getElementById('splashScreen');
+    const loginContainer = document.getElementById('loginContainer');
+    const appContainer = document.getElementById('appContainer');
+    
+    if (!splash) return;
+    
+    // Create loading overlay inside splash (hidden initially)
+    const loadingOverlay = document.createElement('div');
+    loadingOverlay.id = 'splashLoading';
+    loadingOverlay.innerHTML = '<div class="splash-spinner"></div>';
+    loadingOverlay.style.cssText = `
+        position: absolute;
+        inset: 0;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease;
+        z-index: 100;
+    `;
+    splash.appendChild(loadingOverlay);
+    
+    let isProcessing = false;
+    
+    // Handle tap on splash
+    const handleTap = (e) => {
+        // Prevent multiple clicks
+        if (isProcessing) return;
+        isProcessing = true;
+        
+        // Show full white loading screen with spinner
+        loadingOverlay.style.opacity = '1';
+        loadingOverlay.style.visibility = 'visible';
+        
+        // Now check auth
+        checkAuthAndProceed();
+    };
+    
+    splash.addEventListener('click', handleTap);
+    splash.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        handleTap(e);
+    }, { passive: false });
+    
+    function checkAuthAndProceed() {
+        // Check if already have auth state
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            unsubscribe(); // Only check once
+            
+            if (user) {
+                // Logged in - show app
+                setTimeout(() => {
+                    splash.remove();
+                    
+                    if (loginContainer) loginContainer.classList.add('hidden');
+                    if (appContainer) {
+                        appContainer.classList.add('active');
+                        if (window.innerWidth > 1024) {
+                            appContainer.style.transform = 'scale(0.8)';
+                            appContainer.style.transformOrigin = 'center center';
+                            appContainer.style.width = '125%';
+                            appContainer.style.height = '125%';
+                            appContainer.style.position = 'absolute';
+                            appContainer.style.top = '-12.5%';
+                            appContainer.style.left = '-12.5%';
+                        }
+                    }
+                    
+                    setupDevicesListener(user.uid);
+                    window.currentUsername = user.displayName || 'User';
+                    
+                    const userAccount = document.getElementById('userAccount');
+                    if (userAccount && window.currentUsername) {
+                        userAccount.textContent = window.currentUsername.charAt(0).toUpperCase();
+                    }
+                    
+                    showToast(`Welcome back!`, 'success');
+                }, 800); // Brief delay to show spinner
+            } else {
+                // Not logged in - show login
+                setTimeout(() => {
+                    splash.remove();
+                    if (loginContainer) loginContainer.classList.remove('hidden');
+                }, 800);
+            }
+        });
+    }
+});
+
+function hideSplash() {
+    const splash = document.getElementById('splashScreen');
+    if (!splash || splash.classList.contains('splash-hidden')) return;
+    
+    splash.classList.add('splash-hidden');
+    
+    setTimeout(() => {
+        if (splash.parentNode) splash.remove();
+    }, 500);
+}
 // ============================================
 // INITIALIZATION
 // ============================================
