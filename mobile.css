@@ -1,5 +1,5 @@
 /* ============================================
-   MOBILE RESPONSIVE – COMPLETE OVERRIDES
+   MOBILE RESPONSIVE – HEADER, SIDEBAR, CARDS & UNITS
    ============================================ */
 
 @media (max-width: 768px) {
@@ -10,6 +10,14 @@
         --header-height: 56px;
         --radius: 20px;
         --radius-sm: 14px;
+        --card-gap: 12px;
+    }
+
+    /* ---------- GLOBAL TOUCH HIGHLIGHT REMOVAL ---------- */
+    * {
+        -webkit-tap-highlight-color: transparent !important;
+        -webkit-touch-callout: none !important;
+        outline: none !important;
     }
 
     /* ---------- SIDEBAR ---------- */
@@ -65,6 +73,7 @@
         z-index: 2300;
         background: white;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        -webkit-tap-highlight-color: transparent !important;
     }
 
     /* ---------- HEADER ---------- */
@@ -90,6 +99,7 @@
         background: white;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         z-index: 100;
+        -webkit-tap-highlight-color: transparent !important;
     }
 
     .view-header {
@@ -108,42 +118,63 @@
     /* ---------- CONTENT AREA ---------- */
     .main {
         padding: 12px;
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+        box-sizing: border-box;
     }
 
     .content {
         padding: 0;
+        width: 100%;
     }
 
     .view {
         padding: 0;
+        width: 100%;
     }
 
-    /* ---------- CARDS GRID – ALL SINGLE COLUMN ON MOBILE ---------- */
+    /* ---------- CARDS GRID – FULL WIDTH WITH GAP ---------- */
     .cards-grid.grades,
     .cards-grid.subjects-10,
     .cards-grid.subjects-6 {
         grid-template-columns: 1fr !important;
-        gap: 12px;
+        gap: var(--card-gap);
         max-width: 100%;
-        padding: 0 4px;
+        padding: 0;
+        width: 100%;
     }
 
-    /* ---------- MOBILE CARD CLICK FIXES ---------- */
+    /* ---------- CARDS WITH CURVED EDGES ---------- */
     .card {
+        width: 100%;
+        max-width: 100%;
         height: auto;
         padding: 16px;
+        margin: 0;
+        border-radius: var(--radius);
         touch-action: manipulation !important;
-        -webkit-tap-highlight-color: rgba(99, 102, 241, 0.2);
         pointer-events: auto !important;
         cursor: pointer;
         transform: translateZ(0);
         will-change: transform;
-        -webkit-touch-callout: default;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent !important;
+        user-select: none !important;
+    }
+
+    .card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
     }
 
     .card.wide {
         height: auto;
         min-height: 120px;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        border-radius: var(--radius);
     }
 
     .card.subject {
@@ -153,6 +184,10 @@
         padding: 12px 16px;
         height: auto;
         min-height: 80px;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        border-radius: var(--radius);
     }
 
     .card.subject .card-float {
@@ -205,21 +240,38 @@
         pointer-events: none !important;
     }
 
-    /* ---------- UNIT VIEW – 1 COLUMN ON MOBILE ---------- */
+    /* ---------- UNIT GRID – SAME AS SUBJECT CARDS ---------- */
     .unit-grid {
         grid-template-columns: 1fr !important;
-        gap: 10px;
-        padding: 0 4px 20px;
+        gap: var(--card-gap);
+        padding: 0;
+        width: 100%;
     }
 
+    /* ---------- UNIT BOXES – SAME STYLE AS CARDS ---------- */
     .unit-box {
+        width: 100%;
+        max-width: 100%;
         padding: 16px 20px;
-        min-height: 70px;
+        min-height: 80px;
+        margin: 0;
+        border-radius: var(--radius);
         touch-action: manipulation !important;
-        -webkit-tap-highlight-color: rgba(99, 102, 241, 0.2);
         cursor: pointer;
         transform: translateZ(0);
         pointer-events: auto !important;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        -webkit-tap-highlight-color: transparent !important;
+        user-select: none !important;
+    }
+
+    .unit-box:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
     }
 
     .unit-box .unit-info,
@@ -229,196 +281,71 @@
         pointer-events: none !important;
     }
 
+    .unit-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
     .unit-number {
         font-size: 0.7rem;
+        opacity: 0.7;
     }
 
     .unit-name {
-        font-size: 0.95rem;
-    }
-
-    /* ---------- FLOATING ACTION BUTTON ---------- */
-    .fab {
-        bottom: 20px;
-        right: 20px;
-        width: 56px;
-        height: 56px;
-        box-shadow: 0 8px 20px rgba(99, 102, 241, 0.5);
-        touch-action: manipulation;
-    }
-
-    .fab .material-icons {
-        font-size: 24px;
-    }
-
-    /* ---------- SELECTION PANEL ---------- */
-    .selection-panel {
-        left: 16px;
-        right: 16px;
-        bottom: 88px;
-        width: auto;
-        max-height: 60vh;
-        border-radius: 20px;
-    }
-
-    .selection-header {
-        padding: 16px;
-    }
-
-    .selection-header h3 {
         font-size: 1rem;
+        font-weight: 600;
     }
 
-    .selection-count {
-        font-size: 0.75rem;
+    .unit-arrow {
+        font-size: 1.2rem;
+        opacity: 0.6;
+    }
+/* ============================================
+   HIDE SCROLLBAR BUT KEEP SCROLLING
+   ============================================ */
+
+/* Chrome, Safari, Opera */
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+}
+
+/* IE and Edge */
+* {
+    -ms-overflow-style: none !important;
+}
+
+/* Firefox */
+* {
+    scrollbar-width: none !important;
+}
+
+/* Ensure content is still scrollable */
+html, body {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+    /* ---------- BUTTONS & INTERACTIVE ELEMENTS ---------- */
+    button,
+    .btn,
+    a,
+    [role="button"],
+    input[type="button"],
+    input[type="submit"] {
+        -webkit-tap-highlight-color: transparent !important;
+        outline: none !important;
     }
 
-    .selection-list-container {
-        max-height: 40vh;
-        padding: 16px;
-    }
-
-    .selection-item {
-        padding: 14px;
-        touch-action: manipulation;
-    }
-
-    .selection-unit {
-        font-size: 0.9rem;
-    }
-
-    .selection-grade {
-        font-size: 0.7rem;
-    }
-
-    /* ---------- AI MODAL ---------- */
-    .ai-modal {
-        width: 92vw;
-        max-width: 400px;
-        padding: 20px;
-        max-height: 80vh;
-    }
-
-    .ai-option {
-        padding: 16px;
-        touch-action: manipulation;
-        cursor: pointer;
-    }
-
-    .ai-option-icon {
-        width: 44px;
-        height: 44px;
-        font-size: 24px;
-    }
-
-    .ai-option-name {
-        font-size: 0.95rem;
-    }
-
-    .ai-option-desc {
-        font-size: 0.75rem;
-    }
-
-    /* ---------- TOAST NOTIFICATIONS ---------- */
-    .toast-container {
-        left: 16px;
-        right: 16px;
-        bottom: 24px;
-        transform: none;
-        width: auto;
-    }
-
-    .toast {
-        padding: 12px 20px;
-        font-size: 0.85rem;
-        white-space: normal;
-        word-break: break-word;
-    }
-
-    /* ---------- UTILITY MODALS ---------- */
-    .modal-box {
-        width: 90%;
-        max-width: 320px;
-        padding: 20px 16px;
-    }
-
-    .modal-input {
-        padding: 14px;
-        font-size: 1rem;
-    }
-
-    .modal-actions {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .modal-btn-primary,
-    .modal-btn-cancel,
-    .modal-btn-logout {
-        width: 100%;
-        padding: 14px;
-        font-size: 1rem;
-        touch-action: manipulation;
-    }
-
-    /* ---------- DEVICE LIST MODAL ---------- */
-    .devices-list {
-        max-height: 30vh;
-    }
-
-    .device-item {
-        padding: 12px;
-        font-size: 0.85rem;
-    }
-
-    /* ---------- LOGIN PAGE (if visible) ---------- */
-    .login-box {
-        padding: 24px 20px;
-        max-width: 320px;
-    }
-
-    .login-box h1 {
-        font-size: 1.6rem;
-    }
-
-    .phone-input-wrapper {
-        font-size: 1rem;
-    }
-
-    .phone-prefix {
-        padding: 12px;
-    }
-
-    .input-group input {
-        padding: 14px;
-    }
-
-    .login-btn {
-        padding: 16px;
-        font-size: 1rem;
-        touch-action: manipulation;
-    }
-
-    .contact-buttons {
-        flex-wrap: wrap;
-    }
-
-    .contact-btn {
-        padding: 12px 0;
-        font-size: 0.85rem;
-        touch-action: manipulation;
-    }
-
-    /* ---------- HIDE DECORATIVE EMOJIS ON MOBILE (optional) ---------- */
-    .emoji-deco {
-        display: none;
-    }
-
-    /* ---------- ADJUST ANY FLOATING ELEMENTS ---------- */
-    .fab-badge {
-        min-width: 20px;
-        height: 20px;
-        font-size: 10px;
-        pointer-events: none;
+    button:focus,
+    .btn:focus,
+    a:focus,
+    [role="button"]:focus,
+    input:focus {
+        outline: none !important;
+        box-shadow: none !important;
     }
 }
