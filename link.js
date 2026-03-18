@@ -139,13 +139,7 @@ const data = {
             "Unit 4: Governance": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 5: Global": { download: "LINK_HERE", share: "LINK_HERE" }
         }},
-        english: { name: "English", units: {  // ← ADDED: missing from link.js!
-            "Unit 1: Grammar": { download: "LINK_HERE", share: "LINK_HERE" },
-            "Unit 2: Literature": { download: "LINK_HERE", share: "LINK_HERE" },
-            "Unit 3: Writing": { download: "LINK_HERE", share: "LINK_HERE" },
-            "Unit 4: Speaking": { download: "LINK_HERE", share: "LINK_HERE" },
-            "Unit 5: Comprehension": { download: "LINK_HERE", share: "LINK_HERE" }
-        }},
+    
         ict: { name: "ICT", units: { 
             "Unit 1: Hardware": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 2: Software": { download: "LINK_HERE", share: "LINK_HERE" },
@@ -233,13 +227,7 @@ const data = {
             "Unit 4: Law": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 5: Regional": { download: "LINK_HERE", share: "LINK_HERE" }
         }},
-        english: { name: "English", units: {  // ← ADDED
-            "Unit 1: Advanced Grammar": { download: "LINK_HERE", share: "LINK_HERE" },
-            "Unit 2: Poetry": { download: "LINK_HERE", share: "LINK_HERE" },
-            "Unit 3: Drama": { download: "LINK_HERE", share: "LINK_HERE" },
-            "Unit 4: Novel": { download: "LINK_HERE", share: "LINK_HERE" },
-            "Unit 5: Essay Writing": { download: "LINK_HERE", share: "LINK_HERE" }
-        }},
+       
         ict: { name: "ICT", units: { 
             "Unit 1: Networks": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 2: Databases": { download: "LINK_HERE", share: "LINK_HERE" },
@@ -512,13 +500,7 @@ const data = {
             "Unit 4: Agribusiness": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 5: Sustainability": { download: "LINK_HERE", share: "LINK_HERE" }
         }},
-        english: { name: "English", units: {  // ← ADDED
-            "Unit 1: Critical Thinking": { download: "LINK_HERE", share: "LINK_HERE" },
-            "Unit 2: Research": { download: "LINK_HERE", share: "LINK_HERE" },
-            "Unit 3: Advanced Writing": { download: "LINK_HERE", share: "LINK_HERE" },
-            "Unit 4: Literature Analysis": { download: "LINK_HERE", share: "LINK_HERE" },
-            "Unit 5: Communication": { download: "LINK_HERE", share: "LINK_HERE" }
-        }},
+       
         ict: { name: "ICT", units: { 
             "Unit 1: Software Eng": { download: "LINK_HERE", share: "LINK_HERE" },
             "Unit 2: Database Systems": { download: "LINK_HERE", share: "LINK_HERE" },
